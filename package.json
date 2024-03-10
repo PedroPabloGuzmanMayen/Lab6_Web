@@ -1,4 +1,4 @@
-{
+https://github.com/PedroPabloGuzmanMayen/Lab6_Web.gi{
   "name": "star_wars_api",
   "version": "1.0.0",
   "description": "",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PedroPabloGuzmanMayen/Lab6_Web.git"
+    "url": "https://github.com/PedroPabloGuzmanMayen/Lab6_Web.git"
   },
   "author": "Pedro Pablo Guzman",
   "license": "MIT",
