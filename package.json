@@ -5,8 +5,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "lint": "eslint *.js"
+    "start": "node src/main.js",
+    "lint": "eslint src/*.js"
   },
   "repository": {
     "type": "git",
