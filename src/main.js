@@ -2,9 +2,8 @@ import express from 'express'
 import {getPosts} from './db.js'
 
 const app = express()
-const port = 3000
+const port = 22111
 app.get('/', async (req, res) => {
-  console.log( await db.getPosts())
   res.send('Hello World!')
 })
 app.listen(port, () => {
