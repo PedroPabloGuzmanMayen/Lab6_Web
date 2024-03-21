@@ -7,3 +7,5 @@ create table if not exists blog_posts(
     author text not null
 
 );
+
+insert into blog_posts (title, content, banner, author) values ('First Post', 'This is the first post', 'https://www.google.com', 'John Doe');
