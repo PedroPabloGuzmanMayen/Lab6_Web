@@ -15,12 +15,13 @@ app.get('/Posts', async (req, res) => {
   }
 })
 app.post('/newPost', async (req, res) => {
+  console.log(req.body)
   try {
     const { title, content, image } = req.body
     await newPost(title, content, image)
     res.status(200).send('Post creado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)')
   } catch(e) {
-    res.status(500).send('Ha ocurrido un error, el lado oscuro ha triunfado :( (*suena la marcha imperial*)')
+    res.status(500).send(req.body)
   }
 })
 app.listen(port, () => {
