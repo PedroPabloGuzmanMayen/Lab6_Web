@@ -10,11 +10,13 @@ export async function modifyPostByID(id, title, content) {
   if (title === '') {
     return conn.query('UPDATE blog_posts SET content = ? WHERE id = ?', [content, id])
   }
-  if (content === '') {
+  else if (content === '') {
     return conn.query('UPDATE blog_posts SET title = ? WHERE id = ?', [title, id])
   }
-
-  return conn.query('UPDATE blog_posts SET title = ?, content = ? WHERE id = ?', [title, content, id])
+  else{
+    return conn.query('UPDATE blog_posts SET title = ?, content = ? WHERE id = ?', [title, content, id])
+  }
+  
 }
 //Con esta función se crea un nuevo post, se deben verificar los valores que se desean modificar
 export async function newPost(title, content, image) {

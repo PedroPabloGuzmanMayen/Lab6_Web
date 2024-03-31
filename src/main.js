@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPosts } from './db.js'
+import { getPosts, newPost} from './db.js'
 
 const app = express()
 const port = 22111
