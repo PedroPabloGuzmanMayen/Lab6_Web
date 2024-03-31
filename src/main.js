@@ -18,8 +18,8 @@ app.post('/newPost', async (req, res) => {
   
   try {
     console.log(req.body)
-    const { title, content, image } = req.body
-    console.log('Title:', title, 'Content:', content, 'Image:', image)
+    const { title, content, image, author } = req.body
+    console.log('Title:', title, 'Content:', content, 'Image:', image, 'Author:', author)
     await newPost(title, content, image)
     res.status(200).send('Post creado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)')
   } catch(e) {
