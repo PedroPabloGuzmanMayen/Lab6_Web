@@ -21,12 +21,9 @@ export async function modifyPostByID(id, title, content) {
 //Con esta función se crea un nuevo post, se deben verificar los valores que se desean modificar
 export async function newPost(title, content, image) {
   try {
-    if (image === '') {
-      return conn.query('INSERT INTO blog_posts (title, content) VALUES (?, ?)', [title, content])
-    } else {
-      return conn.query('INSERT INTO blog_posts (title, content, banner) VALUES (?, ?, ?)', [title, content, image])
-    }
-  } catch (error) {
+    return conn.query('INSERT INTO blog_posts (title, content, banner) VALUES (?, ?, ?)', [title, content, image])
+  }
+  catch (error) {
     console.error('Error creating new post:', error);
     throw error; // Re-throw the error to be caught by the caller
   }
