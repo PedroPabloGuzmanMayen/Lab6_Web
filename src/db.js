@@ -8,20 +8,20 @@ export async function getPosts() {
 // Con esta función podemos modificar un post dado su ID
 export async function modifyPostByID(id, title, content) {
   if (title === '') {
-    return conn.query('UPDATE blog_posts SET content = ? WHERE id = ?', [content, id])
+    return await conn.query('UPDATE blog_posts SET content = ? WHERE id = ?', [content, id])
   }
   else if (content === '') {
-    return conn.query('UPDATE blog_posts SET title = ? WHERE id = ?', [title, id])
+    return await conn.query('UPDATE blog_posts SET title = ? WHERE id = ?', [title, id])
   }
   else{
-    return conn.query('UPDATE blog_posts SET title = ?, content = ? WHERE id = ?', [title, content, id])
+    return await conn.query('UPDATE blog_posts SET title = ?, content = ? WHERE id = ?', [title, content, id])
   }
   
 }
 //Con esta función se crea un nuevo post, se deben verificar los valores que se desean modificar
 export async function newPost(title, content, image, author) {
   try {
-    return conn.query('INSERT INTO blog_posts (title, content, banner, author) VALUES (?, ?, ?, ?)', [title, content, image, author])
+    return await conn.query('INSERT INTO blog_posts (title, content, banner, author) VALUES (?, ?, ?, ?)', [title, content, image, author])
   }
   catch (error) {
     console.error('Error creating new post:', error);
