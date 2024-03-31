@@ -34,6 +34,7 @@ app.post('/newPost', async (req, res) => {
     res.status(500).send('Error :(')
   }
 })
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
