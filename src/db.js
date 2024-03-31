@@ -8,3 +8,10 @@ export async function getPosts() {
 export function modifyPostByID(id, title, content) {
   return conn.query('UPDATE blog_posts SET title = ?, content = ? WHERE id = ?', [title, content, id])
 }
+
+export function newPost(title, content, image){
+  if (image === undefined){
+    return conn.query('INSERT INTO blog_posts (title, content) VALUES (?, ?)', [title, content])
+  }
+  return conn.query('INSERT INTO blog_posts (title, content, banner) VALUES (?, ?, ?)', [title, content, image])
+}
