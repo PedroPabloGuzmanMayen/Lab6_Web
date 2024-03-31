@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPosts, newPost} from './db.js'
+import { getPosts, newPost, getPostbyID} from './db.js'
 
 const app = express()
 const port = 22111
@@ -10,6 +10,14 @@ app.get('/', (req, res) => {
 app.get('/Posts', async (req, res) => {
   try {
     res.status(200).json(await getPosts())
+  } catch (e) {
+    res.status(500).send('Ha ocurrido un error, el lado oscuro ha triunfado :( (*suena la marcha imperial*)')
+  }
+})
+app.get('/Posts/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    res.status(200).json(await getPostbyID(id))
   } catch (e) {
     res.status(500).send('Ha ocurrido un error, el lado oscuro ha triunfado :( (*suena la marcha imperial*)')
   }
