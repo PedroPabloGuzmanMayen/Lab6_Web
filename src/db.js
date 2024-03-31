@@ -21,7 +21,8 @@ export async function modifyPostByID(id, title, content) {
 //Con esta función se crea un nuevo post, se deben verificar los valores que se desean modificar
 export async function newPost(title, content, image, author) {
   try {
-    return await conn.query('INSERT INTO blog_posts (title, content, banner, author) VALUES (?, ?, ?, ?)', [title, content, image, author])
+    const [rows] = await conn.query('INSERT INTO blog_posts (title, content, banner, author) VALUES (?, ?, ?, ?)', [title, content, image, author])
+    return rows
   }
   catch (error) {
     console.error('Error creating new post:', error);
