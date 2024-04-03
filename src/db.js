@@ -15,7 +15,7 @@ export async function modifyPostByID(id, title, content, image) {
   }
   //Modificar el título y el contenido pero no la imagen
   else if (content !== '', title !== '' && image === '') {
-    const [res] = await conn.query('UPDATE blog_posts SET banner = ? WHERE id = ?', [image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET content = ?, title = ? WHERE id = ?', [title, content, id])
     return res
   }
   //Modificar el título y la imagen pero no el contenido
