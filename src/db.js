@@ -10,37 +10,37 @@ export async function modifyPostByID(id, title, content, image) {
   //Modificar imagen y contenido pero no el título
   try{
   if (title === '' && content !== '' && image !== '') {
-    const [res] =  await conn.query('UPDATE blog_posts SET content = ?, banner = ? WHERE id = ?', [content, image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET content = ?, banner = ? WHERE id = ?', [content, image, id])
     return res
   }
   //Modificar el título y el contenido pero no la imagen
   else if (content !== '', title !== '' && image === '') {
-    const [res] = conn.query('UPDATE blog_posts SET banner = ? WHERE id = ?', [image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET banner = ? WHERE id = ?', [image, id])
     return res
   }
   //Modificar el título y la imagen pero no el contenido
   else if (content === '' && image !== '' && title !== '') {
-    const [res] = conn.query('UPDATE blog_posts SET title = ?, banner = ? WHERE id = ?', [title, image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET title = ?, banner = ? WHERE id = ?', [title, image, id])
     return res
   }
   //Modificar solo el contenido
   else if (content !== '' && image === '' && title === '') {
-    const [res] = conn.query('UPDATE blog_posts SET content = ? WHERE id = ?', [content, id])
+    const [res] = await conn.query('UPDATE blog_posts SET content = ? WHERE id = ?', [content, id])
     return res
   }
   //Modificar solo el título
   else if (content === '' && image === '' && title !== '') {
-    const [res] = conn.query('UPDATE blog_posts SET title = ? WHERE id = ?', [title, id])
+    const [res] = await conn.query('UPDATE blog_posts SET title = ? WHERE id = ?', [title, id])
     return res
   }
   //Modificar solo la imagen
   else if (content === '' && image !== '' && title === '') {
-    const [res] = conn.query('UPDATE blog_posts SET banner = ? WHERE id = ?', [image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET banner = ? WHERE id = ?', [image, id])
     return res
   }
   //Modificar todo el post
   else {
-    const [res] = conn.query('UPDATE blog_posts SET title = ?, content = ?, banner = ? WHERE id = ?', [title, content, image, id])
+    const [res] = await conn.query('UPDATE blog_posts SET title = ?, content = ?, banner = ? WHERE id = ?', [title, content, image, id])
     return res
   }
 } catch (error) {
