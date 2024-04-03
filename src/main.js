@@ -6,9 +6,7 @@ import {
 const app = express()
 const port = 22111
 app.use(express.json())
-app.use((req, res, next) => {
-  res.status(404).send('404 Not Found');
-})
+
 app.get('/', (req, res) => {
   res.send('Hello from a galaxy far far away!')
 })
@@ -50,8 +48,9 @@ app.put('/modifyPost/:id', async (req, res) => {
     res.status(500).send('Error :(')
   }
 })
-
-
+app.use((req, res, next) => {
+  res.status(404).send('404 Not Found');
+})
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
