@@ -1,5 +1,7 @@
 import express from 'express'
-import { getPosts, newPost, getPostbyID, modifyPostByID } from './db.js'
+import {
+  getPosts, newPost, getPostbyID, modifyPostByID,
+} from './db.js'
 
 const app = express()
 const port = 22111
@@ -44,6 +46,9 @@ app.put('/modifyPost/:id', async (req, res) => {
   } catch (e) {
     res.status(500).send('Error :(')
   }
+})
+app.use((req, res, next) => {
+  res.status(404).send('404 Not Found');
 })
 
 app.listen(port, () => {
