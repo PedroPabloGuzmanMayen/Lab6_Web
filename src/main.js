@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPosts, newPost, getPostbyID} from './db.js'
+import { getPosts, newPost, getPostbyID, modifyPostByID } from './db.js'
 
 const app = express()
 const port = 22111
@@ -16,21 +16,32 @@ app.get('/Posts', async (req, res) => {
 })
 app.get('/Posts/:id', async (req, res) => {
   try {
-    const id = req.params.id
+    const { id } = req.body
     res.status(200).json(await getPostbyID(id))
   } catch (e) {
     res.status(500).send('Ha ocurrido un error, el lado oscuro ha triunfado :( (*suena la marcha imperial*)')
   }
 })
 app.post('/newPost', async (req, res) => {
-  
   try {
     console.log(req.body)
-    const { title, content, image, author } = req.body
+    const {
+      title, content, image, author,
+    } = req.body
     console.log('Title:', title, 'Content:', content, 'Image:', image, 'Author:', author)
     await newPost(title, content, image, author)
     res.status(200).send('Post creado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)')
-  } catch(e) {
+  } catch (e) {
+    res.status(500).send('Error :(')
+  }
+})
+app.put('/modifyPost/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const { title, image, content } = req.body
+    await modifyPostByID(id, title, content, image)
+    res.status(200).send('Post modificado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)').json(await getPostbyID(id))
+  } catch (e) {
     res.status(500).send('Error :(')
   }
 })
