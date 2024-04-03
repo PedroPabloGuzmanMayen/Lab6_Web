@@ -8,6 +8,7 @@ export async function getPosts() {
 // Con esta función podemos modificar un post dado su ID
 export async function modifyPostByID(id, title, content, image) {
   //Modificar imagen y contenido pero no el título
+  try{
   if (title === '' && content !== '' && image !== '') {
     const [res] =  await conn.query('UPDATE blog_posts SET content = ?, banner = ? WHERE id = ?', [content, image, id])
     return res
@@ -42,6 +43,11 @@ export async function modifyPostByID(id, title, content, image) {
     const [res] = conn.query('UPDATE blog_posts SET title = ?, content = ?, banner = ? WHERE id = ?', [title, content, image, id])
     return res
   }
+} catch (error) {
+  console.error('Error modifying post:', error)
+  throw error // Re-throw the error to be caught by the caller
+
+}
 
   
 }
