@@ -40,7 +40,7 @@ app.put('/modifyPost/:id', async (req, res) => {
     const { id } = req.params
     const { title, image, content } = req.body
     await modifyPostByID(id, title, content, image)
-    res.status(200).send('Post modificado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)').json(await getPostbyID(id))
+    res.status(200).json(await getPostbyID(id))
   } catch (e) {
     res.status(500).send('Error :(')
   }
