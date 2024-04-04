@@ -1,0 +1,6 @@
+Request: GET / at 2024-04-03T21:07:21.077Z
+Request: GET /favicon.ico at 2024-04-03T21:07:21.398Z
+Request: GET /Posts at 2024-04-03T21:08:42.226Z
+Request: GET /favicon.ico at 2024-04-03T21:08:42.571Z
+Request: GET /Posts at 2024-04-03T21:08:44.675Z
+Request: GET /favicon.ico at 2024-04-03T21:08:44.769Z
