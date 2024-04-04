@@ -65,5 +65,5 @@ export async function getPostbyID(id) {
 }
 // Con esta función se elimina un post dado su ID
 export async function deletePost(id) {
-  return conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
+  return await conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
 }
