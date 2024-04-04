@@ -54,13 +54,14 @@ export async function newPost(title, content, image, author) {
     return rows
   } catch (error) {
     console.error('Error creating new post:', error)
-    throw error // Re-throw the error to be caught by the caller
+    throw error 
   }
 }
 
 // Con esta función se obtiene un post dado su ID
 export async function getPostbyID(id) {
-  return conn.query('SELECT * FROM blog_posts WHERE id = ?', [id])
+  const [result] = await conn.query('SELECT * FROM blog_posts WHERE id = ?', [id])
+  return result
 }
 // Con esta función se elimina un post dado su ID
 export async function deletePost(id) {
