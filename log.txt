@@ -4,3 +4,5 @@ Request: GET /Posts at 2024-04-03T21:08:42.226Z
 Request: GET /favicon.ico at 2024-04-03T21:08:42.571Z
 Request: GET /Posts at 2024-04-03T21:08:44.675Z
 Request: GET /favicon.ico at 2024-04-03T21:08:44.769Z
+Request: GET / Response: [object Object] at 2024-04-08T15:26:44.995Z
+Request: GET /favicon.ico Response: [object Object] at 2024-04-08T15:26:45.084Z

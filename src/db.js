@@ -1,9 +1,16 @@
+// eslint-disable-next-line import/extensions
 import conn from './conn.js'
 
 // Con esta función se obtienen todos los posts de la base de datos
 export async function getPosts() {
-  const [rows] = await conn.query('SELECT * FROM blog_posts')
-  return rows
+  try {
+    const [rows] = await conn.query('SELECT * FROM blog_posts')
+    return rows
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error obtienedo posts:', error)
+    throw error
+  }
 }
 // Con esta función podemos modificar un post dado su ID
 export async function modifyPostByID(id, title, content, image) {
@@ -14,7 +21,7 @@ export async function modifyPostByID(id, title, content, image) {
       return res
     }
     // Modificar el título y el contenido pero no la imagen
-    if (content !== '', title !== '' && image === '') {
+    if (content !== '' && title !== '' && image === '') {
       const [res] = await conn.query('UPDATE blog_posts SET content = ?, title = ? WHERE id = ?', [title, content, id])
       return res
     }
@@ -43,8 +50,9 @@ export async function modifyPostByID(id, title, content, image) {
     const [res] = await conn.query('UPDATE blog_posts SET title = ?, content = ?, banner = ? WHERE id = ?', [title, content, image, id])
     return res
   } catch (error) {
-    console.error('Error modifying post:', error)
-    throw error // Re-throw the error to be caught by the caller
+    // eslint-disable-next-line no-console
+    console.error('Error modificando post post:', error)
+    throw error
   }
 }
 // Con esta función se crea un nuevo post, se deben verificar los valores que se desean modificar
@@ -53,17 +61,25 @@ export async function newPost(title, content, image, author) {
     const [rows] = await conn.query('INSERT INTO blog_posts (title, content, banner, author) VALUES (?, ?, ?, ?)', [title, content, image, author])
     return rows
   } catch (error) {
-    console.error('Error creating new post:', error)
-    throw error 
+    // eslint-disable-next-line no-console
+    console.error('Error creando post:', error)
+    throw error
   }
 }
 
 // Con esta función se obtiene un post dado su ID
 export async function getPostbyID(id) {
-  const [result] = await conn.query('SELECT * FROM blog_posts WHERE id = ?', [id])
-  return result
+  try {
+    const [result] = await conn.query('SELECT * FROM blog_posts WHERE id = ?', [id])
+    return result
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error obteniendo post:', error)
+    throw error
+  }
 }
 // Con esta función se elimina un post dado su ID
 export async function deletePost(id) {
-  return await conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
+  const [res] = await conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
+  return res
 }

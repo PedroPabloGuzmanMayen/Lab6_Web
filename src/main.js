@@ -1,12 +1,14 @@
 import express from 'express'
+import fs from 'fs'
+
 import {
   getPosts, newPost, getPostbyID, modifyPostByID, deletePost,
+  // eslint-disable-next-line import/extensions
 } from './db.js'
-import fs from 'fs';
 
 const app = express()
 const port = 22111
-//Con esta función se guardan todas las request y response en un archivo txt (20 puntos)
+// Con esta función se guardan todas las request y response en un archivo txt (20 puntos)
 const logger = (req, res, next) => {
   fs.appendFileSync('log.txt', `Request: ${req.method} ${req.url} Response: ${res} at ${new Date().toISOString()}\n`)
   next()
@@ -35,11 +37,9 @@ app.get('/Posts/:id', async (req, res) => {
 })
 app.post('/newPost', async (req, res) => {
   try {
-    console.log(req.body)
     const {
       title, content, image, author,
     } = req.body
-    console.log('Title:', title, 'Content:', content, 'Image:', image, 'Author:', author)
     await newPost(title, content, image, author)
     res.status(200).send('Post creado correctamente :) (*suena la canción de throne room [escena de la entrega de medallas en el ep. 4]*)')
   } catch (e) {
@@ -65,10 +65,11 @@ app.delete('/deletePost/:id', async (req, res) => {
     res.status(500).send('Error :(')
   }
 })
-//Verificación si el endpoint is valido (15 puntos)
-app.use((req, res, next) => {
-  res.status(400).send('400 bad request');
+// Verificación si el endpoint is valido (15 puntos)
+app.use((req, res) => {
+  res.status(400).send('400 bad request')
 })
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`)
 })
