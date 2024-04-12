@@ -80,6 +80,12 @@ export async function getPostbyID(id) {
 }
 // Con esta función se elimina un post dado su ID
 export async function deletePost(id) {
-  const [res] = await conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
-  return res
+  try {
+    const [res] = await conn.query('DELETE FROM blog_posts WHERE id = ?', [id])
+    return res
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error eliminando post:', error)
+    throw error
+  }
 }
