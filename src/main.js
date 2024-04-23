@@ -1,5 +1,7 @@
 import express from 'express'
 import fs from 'fs'
+import cors from 'cors'
+
 
 import {
   getPosts, newPost, getPostbyID, modifyPostByID, deletePost,
