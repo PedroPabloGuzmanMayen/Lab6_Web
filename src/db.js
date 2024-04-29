@@ -91,7 +91,7 @@ export async function deletePost(id) {
 }
 
 export async function login(username, password) {
-  const [res] = await conn.query('SELECT * FROM users WHERE username = $1 AND password = $2', [username, password])
+  const [res] = await conn.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password])
   if (res.length === 1) {
     return res
   }
@@ -105,6 +105,6 @@ export async function login(username, password) {
 
 export async function register(username, password) {
 
-    const [res] = await conn.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password])
+    const [res] = await conn.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, password])
     return res
 }
