@@ -20,7 +20,10 @@ const logger = (req, res, next) => {
 app.use(logger)
 
 //Soporte para cors (10 puntos)
-app.use(cors())
+app.use(cors({
+  origin: 'http://127.0.0.1:5173', // Adjust this to the appropriate origin of your frontend application
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}))
 
 app.use(express.json())
 
