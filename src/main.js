@@ -4,9 +4,11 @@ import cors from 'cors'
 
 
 import {
-  getPosts, newPost, getPostbyID, modifyPostByID, deletePost,
+  getPosts, newPost, getPostbyID, modifyPostByID, deletePost, login, register,
   // eslint-disable-next-line import/extensions
 } from './db.js'
+
+import {generateToken, validateToken} from './jwt.js'
 
 const app = express()
 const port = 22111
@@ -70,6 +72,28 @@ app.delete('/deletePost/:id', async (req, res) => {
     res.status(500).send('Error :(')
   }
 })
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body
+  const user = await login(username, password)
+  if (user) {
+    const token = generateToken(user[0].username)
+    res.status(200).json({ 'success': true, access_token: token, user: username })
+  } else {
+    res.status(401).json({'success': false})
+  }
+})
+
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body
+  const user = await register(username, password)
+  if (user) {
+    res.status(200).json({'success': true, user: username })
+  } else {
+    res.status(401).json({'success': false})
+  }
+})
+
 // Verificación si el endpoint is valido (15 puntos)
 app.use((req, res) => {
   res.status(400).send('400 bad request')
